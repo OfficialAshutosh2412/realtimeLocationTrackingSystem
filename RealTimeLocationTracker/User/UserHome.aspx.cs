@@ -11,7 +11,10 @@ namespace RealTimeLocationTracker.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                lblUsername.Text = Session["username"].ToString();
+            }
         }
     }
 }
