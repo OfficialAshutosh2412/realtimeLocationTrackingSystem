@@ -78,6 +78,7 @@
     <Content Include="App_Data\rtls_log.ldf">
       <DependentUpon>rtls.mdf</DependentUpon>
     </Content>
+    <Content Include="User\GetUserPath.aspx" />
     <Content Include="User\MarkOffline.aspx" />
     <Content Include="User\SaveLocationToDB.aspx" />
     <Content Include="User\UserHome.aspx" />
@@ -129,6 +130,13 @@
       <DependentUpon>HomeLayout.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\GetUserPath.aspx.cs">
+      <DependentUpon>GetUserPath.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\GetUserPath.aspx.designer.cs">
+      <DependentUpon>GetUserPath.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\MarkOffline.aspx.cs">
       <DependentUpon>MarkOffline.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

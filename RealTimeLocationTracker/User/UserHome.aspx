@@ -43,13 +43,12 @@
     <div>
         <div class="mt-5">
             <%--link--%>
-            <asp:HyperLink
-                ID="lnkLocationHistory"
-                runat="server"
-                NavigateUrl="~/User/YourLocationHistory.aspx"
-                CssClass="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5">
-            View Location History
-            </asp:HyperLink>
+            <a
+                id="lnkLocationHistory"
+                href="YourLocationHistory.aspx?username=<%=HttpUtility.UrlEncode(Session["username"].ToString()) %>"
+                class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5">
+            View your location history
+            </a>
             <%--button--%>
             <button type="button" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5" onclick="startTracking()">
                 Track your activity.
