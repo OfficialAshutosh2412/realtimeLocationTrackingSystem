@@ -67,7 +67,8 @@
                             fillOpacity: 0.9
                         }).addTo(map).bindPopup(`
                             <b>${point.username}</b><br>
-                            ${isLast ? "🟢 Online" : "🔴 ofline"}<br>
+                            ${isLast ? (point.isOnline ? "🟢 Online" : "🔴 offline"): "🔴 offline"}<br>
+                            
                             <small>${point.recordedAt}</small>
                         `);
                     });

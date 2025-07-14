@@ -73,7 +73,9 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Signup.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
+    <Content Include="Admin\GetAllUserLocationHistory.aspx" />
     <Content Include="Admin\UserLocationHistory.aspx" />
+    <Content Include="Admin\UserProfile.aspx" />
     <Content Include="App_Data\rtls.mdf" />
     <Content Include="App_Data\rtls_log.ldf">
       <DependentUpon>rtls.mdf</DependentUpon>
@@ -114,12 +116,26 @@
     <Compile Include="Admin\AdminLayout.Master.designer.cs">
       <DependentUpon>AdminLayout.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\GetAllUserLocationHistory.aspx.cs">
+      <DependentUpon>GetAllUserLocationHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\GetAllUserLocationHistory.aspx.designer.cs">
+      <DependentUpon>GetAllUserLocationHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UserLocationHistory.aspx.cs">
       <DependentUpon>UserLocationHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\UserLocationHistory.aspx.designer.cs">
       <DependentUpon>UserLocationHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="DynamicConnectionStringClass.cs" />
     <Compile Include="HomeLayout.Master.cs">
