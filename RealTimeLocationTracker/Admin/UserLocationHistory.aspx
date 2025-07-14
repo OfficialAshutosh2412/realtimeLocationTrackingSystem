@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>All User Location History</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <!-- Leaflet JS -->
@@ -78,7 +78,7 @@
                 })
         }
         window.onload = LoadMapData;
-        setInterval(LoadMapData, 50000);
+        setInterval(LoadMapData, 10000);
     </script>
 </body>
 </html>

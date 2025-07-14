@@ -31,6 +31,8 @@ namespace RealTimeLocationTracker.User
                     int affectedRow = cmd.ExecuteNonQuery();
                     if (affectedRow > 0)
                     {
+                        Session.Clear();
+                        Session.Abandon();
                         Response.Write("You are offline.");
                     }
                     else

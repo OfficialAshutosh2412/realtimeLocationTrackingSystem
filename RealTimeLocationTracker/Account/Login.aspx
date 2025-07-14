@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HomeLayout.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="RealTimeLocationTracker.Account.Login" %>
+﻿<%@ Page Title="Sign-In" Language="C#" MasterPageFile="~/HomeLayout.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="RealTimeLocationTracker.Account.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

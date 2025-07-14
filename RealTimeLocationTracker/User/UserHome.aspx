@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User/UserLayout.Master" AutoEventWireup="true" CodeBehind="UserHome.aspx.cs" Inherits="RealTimeLocationTracker.User.UserHome" %>
+﻿<%@ Page Title="User Home" Language="C#" MasterPageFile="~/User/UserLayout.Master" AutoEventWireup="true" CodeBehind="UserHome.aspx.cs" Inherits="RealTimeLocationTracker.User.UserHome" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -43,20 +43,20 @@
     <div>
         <div class="mt-5">
             <%--link--%>
-            <a
+            <%--<a
                 id="lnkLocationHistory"
                 href="YourLocationHistory.aspx?username=<%=HttpUtility.UrlEncode(Session["username"].ToString()) %>"
                 class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5">
             View your location history
-            </a>
+            </a>--%>
             <%--button--%>
             <button type="button" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5" onclick="startTracking()">
                 Track your activity.
             </button>
             <%--stop button--%>
-            <button type="button" class="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out" onclick="stopTracking()">
+            <%--<button type="button" class="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out" onclick="stopTracking()">
                 stop tracking your activity.
-            </button>
+            </button>--%>
         </div>
     </div>
     <script>
@@ -105,7 +105,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ Username: username })
                 }).then(() => {
-                    alert("You are now offline.");
+                    alert("You're now logout, and location service is stop.");
+                    window.location.href = "/Account/Login.aspx";
                 })
             }
         }

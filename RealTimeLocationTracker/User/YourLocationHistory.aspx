@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>My Location History</title>
     <style>
         #mapid{
             height:600px;
@@ -85,7 +85,7 @@
 
         //loading main function on page load and after every 10s
         window.onload = loadUserPath;
-        setInterval(loadUserPath, 10000);
+        setInterval(loadUserPath, 5000);
     </script>
 </body>
 </html>
