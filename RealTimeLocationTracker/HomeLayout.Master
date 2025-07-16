@@ -17,13 +17,13 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <div class="flex-shrink-0">
-          <a href="#" class="text-xl font-bold text-white">RTLT</a>
+          <a href="../Home.aspx" class="text-xl font-bold text-white">RTLT</a>
         </div>
 
         <!-- Menu (desktop) -->
         <div class="hidden md:flex space-x-6">
-          <a href="Login.aspx" class="text-gray-300 hover:text-emerald-400 transition">Home</a>
-          <a href="Signup.aspx" class="text-gray-300 hover:text-emerald-400 transition">Sign Up</a>
+            <asp:HyperLink NavigateUrl="~/Account/Signup.aspx" runat="server" CssClass="text-gray-300 hover:text-emerald-400 transition">Signup</asp:HyperLink>
+          
         </div>
 
         <!-- Hamburger (mobile) -->
@@ -41,8 +41,8 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-gray-800">
-      <a href="Login.aspx" class="text-gray-300 block hover:text-emerald-400">Home</a>
-      <a href="Signup.aspx" class="text-gray-300 block hover:text-emerald-400">Sign Up</a>
+      <a href="/Account/Login.aspx" class="text-gray-300 block hover:text-emerald-400">Login</a>
+      <a href="/Account/Signup.aspx" class="text-gray-300 block hover:text-emerald-400">Sign Up</a>
     </div>
   </nav>
     <form id="form1" runat="server">

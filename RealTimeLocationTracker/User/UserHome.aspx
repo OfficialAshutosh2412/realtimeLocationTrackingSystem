@@ -42,21 +42,7 @@
     </div>
     <div>
         <div class="mt-5">
-            <%--link--%>
-            <%--<a
-                id="lnkLocationHistory"
-                href="YourLocationHistory.aspx?username=<%=HttpUtility.UrlEncode(Session["username"].ToString()) %>"
-                class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5">
-            View your location history
-            </a>--%>
-            <%--button--%>
-            <button type="button" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out mr-5" onclick="startTracking()">
-                Track your activity.
-            </button>
-            <%--stop button--%>
-            <%--<button type="button" class="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out" onclick="stopTracking()">
-                stop tracking your activity.
-            </button>--%>
+            <h1>Your live location is now shared with administrator.</h1>
         </div>
     </div>
     <script>
