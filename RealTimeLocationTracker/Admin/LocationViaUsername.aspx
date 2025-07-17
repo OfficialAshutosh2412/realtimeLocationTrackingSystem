@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="fixed top-16 left-0 p-5 bg-emerald-700 rounded" style="z-index:10000">
+    <div class="fixed top-16 left-0 p-5 bg-emerald-700" style="z-index: 10000">
         <h1 class="text-xl tracking-widest mt-2 mb-5">Filter Map</h1>
         <div>
             <span class="font-semibold text-gray-200">by username :</span><br />
@@ -23,21 +23,44 @@
                     SelectCommand="SELECT [username] FROM [signup]"></asp:SqlDataSource>
             </span>
         </div>
+        <div class="border border-emerald-400 w-full mt-5"></div>
+        <div class="mt-5">
+            <h1 class="mb-2">By date range.</h1>
+            <div class="mb-5">
+                <asp:Label Text="Start Date:" runat="server" CssClass="font-semibold text-gray-200" /><br />
+                <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource2" DataTextField="recordedAt" DataValueField="recordedAt"
+                    CssClass="w-full md:w-64 px-4 py-2 bg-gray-800 text-white border border-emerald-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition duration-200">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:stringOne %>" SelectCommand="SELECT [recordedAt] FROM [UserLocationHistory]"></asp:SqlDataSource>
+
+            </div>
+            <div>
+                <asp:Label Text="End Date:" runat="server" CssClass="font-semibold text-gray-200" /><br />
+                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource2" DataTextField="recordedAt" DataValueField="recordedAt"
+                    CssClass="w-full md:w-64 px-4 py-2 bg-gray-800 text-white border border-emerald-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition duration-200">
+                </asp:DropDownList>
+
+            </div>
+            <button type="button" id="show" class="bg-gray-800 border border-purple-400 p-2 px-5 font-semibold rounded-lg mt-5">show data</button>
+        </div>
     </div>
 
-
+    <%--map--%>
     <div id="mapid" class="h-[100vh] w-full border-2 border-emerald-400"></div>
-
+    <%--scripts--%>
     <script>
+        //base map initiallisation
         const map = L.map("mapid").setView([22.5937, 78.9629], 3);
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
             attribution: '&copy; OpenStreetMap contributors',
         }).addTo(map);
 
+        //previous marker and polyline flushers
         let currentPathLayer = null;
         let currentMarkers = [];
 
+        //oload function calling.
         window.onload = () => {
             const drops = document.querySelector("#<%=DropDownList1.ClientID%>");
             let username = drops.value;
@@ -50,6 +73,8 @@
             } else { return }
 
         }
+
+        //main function that fetch endpoint
         function showUserLocation(username) {
             fetch(`../User/GetUserPath.aspx?username=${encodeURIComponent(username)}`)
                 .then(res => res.json())
@@ -95,6 +120,13 @@
                     })
                 });
         }
+
+        //filter by date processing
+        document.getElementById('show').addEventListener('click', () => {
+            const sdate = document.querySelector('#<%=DropDownList2.ClientID%>').value;
+            const edate = document.querySelector('#<%=DropDownList3.ClientID%>').value;
+            if (sdate >= edate) alert("please select date correctly...")
+        })
 
     </script>
 </asp:Content>

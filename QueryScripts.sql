@@ -93,10 +93,7 @@ INSERT INTO UserLocationHistory (username, latitude, longitude, recordedAt, isOn
 
 
 
---CREATE TABLE UserLocation(
---	[id] INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
---	[username] NVARCHAR(100)  NOT NULL,
---	[latitude] FLOAT(53) NOT NULL,
---	[longitude] FLOAT(53) NOT NULL,
---	[lastUpdated] DATETIME NOT NULL,
---);	
+select * from UserLocationHistory
+where recordedAt
+Between '2025-07-16 19:51:25' AND '2025-07-15 20:12:17'  
+
