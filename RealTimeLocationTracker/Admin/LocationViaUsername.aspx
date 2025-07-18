@@ -60,7 +60,7 @@
         let currentPathLayer = null;
         let currentMarkers = [];
 
-        //oload function calling.
+        //onload function calling.
         window.onload = () => {
             const drops = document.querySelector("#<%=DropDownList1.ClientID%>");
             let username = drops.value;
@@ -125,7 +125,13 @@
         document.getElementById('show').addEventListener('click', () => {
             const sdate = document.querySelector('#<%=DropDownList2.ClientID%>').value;
             const edate = document.querySelector('#<%=DropDownList3.ClientID%>').value;
-            if (sdate >= edate) alert("please select date correctly...")
+            if (sdate >= edate) alert("Error : please select date order correctly, past date comes first.")
+
+            //making request
+            fetch(`GetUserLocationHistory.aspx?sdate=${encodeURIComponent(sdate)}&edate=${encodeURIComponent(edate)}`, { method: 'GET' })
+                .then((res) => res.json())
+                .then((data) => console.log(data))
+                .catch((err) => console.error("Error : " + err));
         })
 
     </script>

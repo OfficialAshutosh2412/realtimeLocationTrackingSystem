@@ -74,6 +74,7 @@
     <Content Include="Account\Signup.aspx" />
     <Content Include="Admin\AdminHome.aspx" />
     <Content Include="Admin\GetAllUserLocationHistory.aspx" />
+    <Content Include="Admin\GetUserLocationHistory.aspx" />
     <Content Include="Admin\LocationViaUsername.aspx" />
     <Content Include="Admin\UserLocationHistory.aspx" />
     <Content Include="Admin\UserProfile.aspx" />
@@ -124,6 +125,13 @@
     </Compile>
     <Compile Include="Admin\GetAllUserLocationHistory.aspx.designer.cs">
       <DependentUpon>GetAllUserLocationHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\GetUserLocationHistory.aspx.cs">
+      <DependentUpon>GetUserLocationHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\GetUserLocationHistory.aspx.designer.cs">
+      <DependentUpon>GetUserLocationHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\LocationViaUsername.aspx.cs">
       <DependentUpon>LocationViaUsername.aspx</DependentUpon>
