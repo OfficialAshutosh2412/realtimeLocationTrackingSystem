@@ -89,7 +89,6 @@
                         weight: 3,
                     }).addTo(map);
                     map.fitBounds(currentPathLayer.getBounds());
-                    //markers
                     //deleting old markers
                     currentMarkers.forEach((markers => map.removeLayer(markers)));
                     currentMarkers = [];
@@ -125,12 +124,81 @@
         document.getElementById('show').addEventListener('click', () => {
             const sdate = document.querySelector('#<%=DropDownList2.ClientID%>').value;
             const edate = document.querySelector('#<%=DropDownList3.ClientID%>').value;
-            if (sdate >= edate) alert("Error : please select date order correctly, past date comes first.")
+            if (sdate >= edate) {
+                alert("Error : please select date order correctly, past date comes first.");
+                return;
+            }
 
             //making request
             fetch(`GetUserLocationHistory.aspx?sdate=${encodeURIComponent(sdate)}&edate=${encodeURIComponent(edate)}`, { method: 'GET' })
                 .then((res) => res.json())
-                .then((data) => console.log(data))
+                .then((data) => {
+                    //grouping usernames in a single object.
+                    const group = {};
+                    data.forEach((item) => {
+                        if (!group[item.username]) {
+                            group[item.username] = [];
+                        }
+                        group[item.username].push(item);
+                    });
+                    
+                    //polyline
+                    const points = data.map((item) => [item.latitude, item.longitude])
+                    if (currentPathLayer) {
+                        map.removeLayer(currentPathLayer);
+                    }
+                    currentPathLayer = L.polyline(points, {
+                        color: 'orange',
+                        weight: 3
+                    }).addTo(map);
+                    map.fitBounds(currentPathLayer.getBounds());
+                    //markers
+                    //deleting old markers
+                    for (let user in group) {
+                        group[user].sort((a, b) => new Date(a.recordedAt) - new Date(b.recordedAt));
+                    }
+
+                    currentMarkers.forEach((markers => map.removeLayer(markers)));
+                    currentMarkers = [];
+
+                    data.map((item, currentIdx) => {
+                        const userGroup = group[item.username];
+                        const userLastEntry = userGroup[userGroup.length - 1];
+                        const isLastForUser = item === userLastEntry;
+                        let color = "red";
+                        if (isLastForUser && item.isOnline) {
+                            color = 'green';
+                        }
+                      
+                        const marker = L.circleMarker([item.latitude, item.longitude], {
+                            color: color,
+                            fillColor: color,
+                            fillOpacity: 0.9,
+                        }).addTo(map);
+                        marker.bindPopup(`
+                            <label class='font-semibold'>${item.username}</label><br/>
+                            <small>
+                                ${isLastForUser ?
+                                (item.isOnline ?
+                                    '<span class="bg-green-800 text-white font-semibold p-1 rounded-xl">online</span>'
+                                    :
+                                    '<span class="bg-red-600 text-white font-semibold p-1 rounded-xl">offline</span>'
+                                ) : '<span class="bg-red-600 text-white font-semibold p-1 rounded-xl">offline</span>'
+                            }
+                                </small><br/>
+                                <small>${item.recordedAt}</small>
+                        `);
+                        if (isLastForUser) {
+                            marker.bindTooltip(`${item.username}`, {
+                                permanent: true,
+                                direction: 'top',
+                                offset: [0, -5],
+                                className: `${item.isOnline? 'bg-green-600':'bg-red-600'} text-white rounded px-2 py-1 shadow-[1px_1px_5px_4px_black]`
+                            }).openTooltip();
+                        }
+                        currentMarkers.push(marker);
+                    })
+                })
                 .catch((err) => console.error("Error : " + err));
         })
 

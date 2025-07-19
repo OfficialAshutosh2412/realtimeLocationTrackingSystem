@@ -21,7 +21,7 @@ namespace RealTimeLocationTracker.Admin
             public string username { get; set; }
             public double latitude { get; set; }
             public double longitude { get; set; }
-            public string recorderdAt { get; set; }
+            public string recordedAt { get; set; }
             public Boolean isOnline { get; set; }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace RealTimeLocationTracker.Admin
                                 username = dtr["username"].ToString(),
                                 latitude = Convert.ToDouble(dtr["latitude"]),
                                 longitude = Convert.ToDouble(dtr["longitude"]),
-                                recorderdAt = dtr["recordedAt"].ToString(),
+                                recordedAt = dtr["recordedAt"].ToString(),
                                 isOnline=Convert.ToBoolean(dtr["isOnline"]),
                             });
                         }

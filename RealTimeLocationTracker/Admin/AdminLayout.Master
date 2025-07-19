@@ -12,42 +12,44 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+
 </head>
 <body class="bg-gray-900 text-white">
-     <!-- Navbar -->
-  <nav class="bg-gray-800 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex-shrink-0">
-          <a href="AdminHome.aspx" class="text-xl font-bold text-white">RTLT</a>
+    <!-- Navbar -->
+    <nav class="bg-gray-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="AdminHome.aspx" class="text-xl font-bold text-white">RTLT</a>
+                </div>
+
+                <!-- Menu (desktop) -->
+                <div class="hidden md:flex space-x-6 md:items-center">
+                    <a href="UserLocationHistory.aspx" class="text-gray-300 hover:text-emerald-400 transition">Locations</a>
+                    <a href="UserProfile.aspx" class="text-gray-300 hover:text-emerald-400 transition">Users</a>
+                </div>
+
+                <!-- Hamburger (mobile) -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- Menu (desktop) -->
-        <div class="hidden md:flex space-x-6 md:items-center">
-          <a href="UserLocationHistory.aspx" class="text-gray-300 hover:text-emerald-400 transition">Locations</a>
-          <a href="UserProfile.aspx" class="text-gray-300 hover:text-emerald-400 transition">Users</a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-gray-800">
+            <a href="UserLocationHistory.aspx" class="text-gray-300 block hover:text-emerald-400">Locations</a>
+            <a href="UserProfile.aspx" class="text-gray-300 block hover:text-emerald-400">Users</a>
         </div>
-
-        <!-- Hamburger (mobile) -->
-        <div class="md:hidden">
-          <button id="menu-toggle" class="text-gray-300 hover:text-white focus:outline-none">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor"
-                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-gray-800">
-      <a href="UserLocationHistory.aspx" class="text-gray-300 block hover:text-emerald-400">Locations</a>
-      <a href="UserProfile.aspx" class="text-gray-300 block hover:text-emerald-400">Users</a>
-    </div>
-  </nav>
+    </nav>
     <form id="form1" runat="server">
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -56,13 +58,13 @@
     </form>
 
     <script>
-    // Toggle mobile menu
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
+        // Toggle mobile menu
+        const toggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('mobile-menu');
 
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
