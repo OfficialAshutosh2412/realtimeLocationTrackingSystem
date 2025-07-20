@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Location Filter" Language="C#" MasterPageFile="~/Admin/AdminLayout.Master" AutoEventWireup="true" CodeBehind="LocationViaUsername.aspx.cs" Inherits="RealTimeLocationTracker.Admin.LocationViaUsername" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="fixed top-16 left-0 p-5 bg-emerald-700" style="z-index: 10000">
@@ -52,7 +53,7 @@
         //base map initiallisation
         const map = L.map("mapid").setView([22.5937, 78.9629], 3);
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
+            maxZoom: 50,
             attribution: '&copy; OpenStreetMap contributors',
         }).addTo(map);
 
@@ -161,15 +162,24 @@
                     currentMarkers.forEach((markers => map.removeLayer(markers)));
                     currentMarkers = [];
 
-                    data.map((item, currentIdx) => {
+                    data.map((item, index) => {
                         const userGroup = group[item.username];
-                        const userLastEntry = userGroup[userGroup.length - 1];
-                        const isLastForUser = item === userLastEntry;
+                        //starting location
+                        const userFirstLocation = userGroup[0];
+                        //user last location
+                        const userLastLocation = userGroup[userGroup.length - 1];
+                        //cheking if user first?
+                        const isFirstForUser = item === userFirstLocation;
+                        console.log(isFirstForUser)
+                        //checking last user location?
+                        const isLastForUser = item === userLastLocation;
+                        //setting default color.
                         let color = "red";
+                        //checkin if onlin or last then green.
                         if (isLastForUser && item.isOnline) {
                             color = 'green';
                         }
-                      
+                        
                         const marker = L.circleMarker([item.latitude, item.longitude], {
                             color: color,
                             fillColor: color,
@@ -188,8 +198,16 @@
                                 </small><br/>
                                 <small>${item.recordedAt}</small>
                         `);
+                        if (isFirstForUser) {
+                            marker.bindTooltip(`${item.username}<br/><span class='text-xs font-semibold'>Starting Point</span>`, {
+                                permanent: true,
+                                direction: 'top',
+                                offset: [0, -5],
+                                className: `${item.isOnline ? 'bg-green-600' : 'bg-red-600'} text-white rounded px-2 py-1 shadow-[1px_1px_5px_4px_black]`
+                            }).openTooltip();
+                        }
                         if (isLastForUser) {
-                            marker.bindTooltip(`${item.username}`, {
+                            marker.bindTooltip(`${item.username}<br/><span class='text-xs font-semibold'>Ending Point</span`, {
                                 permanent: true,
                                 direction: 'top',
                                 offset: [0, -5],
