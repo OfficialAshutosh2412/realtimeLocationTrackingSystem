@@ -46,7 +46,7 @@
         </div>
     </div>
     <script>
-        let watchID;
+        <%--let watchID;
         //startTracking
         function startTracking() {
             if (navigator.geolocation) {
@@ -97,6 +97,6 @@
             }
         }
         //onload calling
-        window.onload=startTracking;
+        window.onload=startTracking;--%>
     </script>
 </asp:Content>

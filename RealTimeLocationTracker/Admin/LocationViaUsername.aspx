@@ -149,7 +149,7 @@
                         map.removeLayer(currentPathLayer);
                     }
                     currentPathLayer = L.polyline(points, {
-                        color: 'orange',
+                        color: 'purple',
                         weight: 3
                     }).addTo(map);
                     map.fitBounds(currentPathLayer.getBounds());
