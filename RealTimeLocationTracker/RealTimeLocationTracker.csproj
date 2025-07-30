@@ -76,6 +76,7 @@
     <Content Include="Admin\GetAllUserLocationHistory.aspx" />
     <Content Include="Admin\GetUserLocationHistory.aspx" />
     <Content Include="Admin\LocationViaUsername.aspx" />
+    <Content Include="Admin\OnlineUsers.aspx" />
     <Content Include="Admin\UserLocationHistory.aspx" />
     <Content Include="Admin\UserProfile.aspx" />
     <Content Include="App_Data\rtls.mdf" />
@@ -83,8 +84,9 @@
       <DependentUpon>rtls.mdf</DependentUpon>
     </Content>
     <Content Include="Home.aspx" />
+    <Content Include="Scripts\apis.js" />
     <Content Include="Scripts\UserScript.js" />
-    <Content Include="User\CurrentLocationEndPoint.aspx" />
+    <Content Include="Shared Endpoint\CurrentLocationEndPoint.aspx" />
     <Content Include="User\GetUserPath.aspx" />
     <Content Include="User\MarkOffline.aspx" />
     <Content Include="User\MyCurrentLocation.aspx" />
@@ -143,6 +145,13 @@
     <Compile Include="Admin\LocationViaUsername.aspx.designer.cs">
       <DependentUpon>LocationViaUsername.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\OnlineUsers.aspx.cs">
+      <DependentUpon>OnlineUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OnlineUsers.aspx.designer.cs">
+      <DependentUpon>OnlineUsers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UserLocationHistory.aspx.cs">
       <DependentUpon>UserLocationHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -173,11 +182,11 @@
       <DependentUpon>HomeLayout.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User\CurrentLocationEndPoint.aspx.cs">
+    <Compile Include="Shared Endpoint\CurrentLocationEndPoint.aspx.cs">
       <DependentUpon>CurrentLocationEndPoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User\CurrentLocationEndPoint.aspx.designer.cs">
+    <Compile Include="Shared Endpoint\CurrentLocationEndPoint.aspx.designer.cs">
       <DependentUpon>CurrentLocationEndPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\GetUserPath.aspx.cs">

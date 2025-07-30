@@ -28,6 +28,7 @@
                 <div class="hidden md:flex space-x-6 md:items-center">
                     <a href="UserLocationHistory.aspx" class="text-gray-300 hover:text-emerald-400 transition">Locations</a>
                     <a href="UserProfile.aspx" class="text-gray-300 hover:text-emerald-400 transition">Users</a>
+                    <a href="OnlineUsers.aspx" class="text-gray-300 hover:text-emerald-400 transition">Online Users</a>
                 </div>
 
                 <!-- Hamburger (mobile) -->

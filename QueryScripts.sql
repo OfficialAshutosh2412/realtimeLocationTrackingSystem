@@ -97,3 +97,6 @@ select * from UserLocationHistory
 where recordedAt
 Between '2025-07-16 19:51:25' AND '2025-07-15 20:12:17'  
 
+
+
+select distinct username from UserLocationHistory where isOnline=1

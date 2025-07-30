@@ -51,3 +51,4 @@ function stopTracking() {
 }
 //onload calling
 window.onload = startTracking;
+

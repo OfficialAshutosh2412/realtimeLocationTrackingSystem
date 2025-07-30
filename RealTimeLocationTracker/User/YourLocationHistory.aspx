@@ -20,7 +20,7 @@
 </head>
 <body class="bg-gray-900 text-white">
     <div id="mapid"></div>
-
+    <script src="../Scripts/apis.js"></script>
     <script>
         //map initialisation.
         const map = L.map('mapid').setView([20.5937, 78.9629], 5);
@@ -39,41 +39,9 @@
                 alert("User not found");
                 return;
             }
-            //now calling a backend for getting data from database.
-            fetch(`GetUserPath.aspx?username=${encodeURIComponent(username)}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    const latlong = data.map(items => [items.latitude, items.longitude])
-                    L.polyline(latlong, {
-                        color: 'blue',
-                        weight: 3
-                    }).addTo(map);
-                    map.fitBounds(latlong);
-
-                    //now make markers
-                    data.forEach((point, index) => {
-                        //checking each element is last or not, for that, i am comparing upcomming index with last index, index whch match the last index will be the last element with last index and isLast becomes true.
-                        const isLast = index === data.length - 1;
-                        //setting color green for dots, by default
-                        let color = 'red';
-                        //setting color red, if element is last, otherwise rest ae green dots
-                        if (isLast) {
-                            color = point.isOnline ? 'green' : 'red';
-                        }
-                        //markers for creating dot on location
-                        L.circleMarker([point.latitude, point.longitude], {
-                            radius: isLast ? 8 : 5,
-                            color: color,
-                            fillColor: color,
-                            fillOpacity: 0.9
-                        }).addTo(map).bindPopup(`
-                            <b>${point.username}</b><br>
-                            ${isLast ? (point.isOnline ? "🟢 Online" : "🔴 offline"): "🔴 offline"}<br>
-                            
-                            <small>${point.recordedAt}</small>
-                        `);
-                    });
-                })
+            //api call
+            FetchMyLocationHistory(username);
+            
 
         }
         //function definition to get username from query string.
