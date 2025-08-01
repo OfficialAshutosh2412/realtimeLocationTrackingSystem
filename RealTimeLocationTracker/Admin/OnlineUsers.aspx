@@ -26,19 +26,88 @@
             attribution: '© OpenStreetMap contributors',
         }).addTo(map);
 
-        
+        let currentUserLayer = null; // Will hold previous user's markers + polyline
+
+        function FetchOnlineData(username) {
+            fetch(`../Shared Endpoint/CurrentLocationEndPoint.aspx?username=${encodeURIComponent(username)}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    // 🧹 Remove previous user markers/polyline
+                    if (currentUserLayer) {
+                        map.removeLayer(currentUserLayer);
+                    }
+
+                    const latlong = data.map(item => [item.latitude, item.longitude]);
+
+                    // 🎯 Create a new group to hold all elements for this user
+                    const userLayerGroup = L.layerGroup();
+
+                    // 🔷 Add polyline to group
+                    const polyline = L.polyline(latlong, {
+                        color: 'blue',
+                        weight: 3
+                    }).addTo(userLayerGroup);
+
+                    // Fit map to the polyline
+                    map.fitBounds(polyline.getBounds());
+
+                    // 🔘 Add markers to group
+                    data.forEach((point, index) => {
+                        const isLast = index === data.length - 1;
+                        const color = isLast ? 'purple' : 'green';
+
+                        const marker = L.circleMarker([point.latitude, point.longitude], {
+                            radius: isLast ? 8 : 5,
+                            color: color,
+                            fillColor: color,
+                            fillOpacity: 0.9
+                        }).addTo(userLayerGroup);
+
+                        marker.bindPopup(`
+                    <b>${point.username}</b><br>
+                    ${isLast ? (point.isOnline ? "🟣 Online" : "🔴 Offline") : "🟢 Previously Online"}<br>
+                    <small>${point.recordedAt}</small>
+                `);
+
+                        if (isLast) {
+                            marker.bindTooltip("Currently here", {
+                                permanent: true,
+                                direction: "top",
+                                className: "current-tooltip"
+                            }).openTooltip();
+                        }
+                    });
+
+                    // 🆕 Add the group to the map
+                    userLayerGroup.addTo(map);
+
+                    // 💾 Store reference so we can clear it next time
+                    currentUserLayer = userLayerGroup;
+                })
+                .catch((error) => {
+                    console.error("Error loading user data:", error);
+                });
+        }
+
         //once page is loaded, then fire this event methods.
-        <%--document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const option = document.querySelector("#<%= DropDownList1.ClientID%>");
             let username = option.value;
-            fetchData(username);
+            FetchOnlineData(username);
             if (option) {
                 option.addEventListener("change", (e) => {
                     username = e.target.value
-                    fetchData(username);
+                    FetchOnlineData(username);
+
                 })
             } else { return }
-            setInterval(fetchData, 60000);
-        });--%>
+            setInterval(() => {
+                const currentUsername = document.querySelector("#<%= DropDownList1.ClientID %>").value;
+                if (currentUsername) {
+                    FetchOnlineData(currentUsername);
+                }
+            }, 10000);
+        });
+
     </script>
 </asp:Content>
